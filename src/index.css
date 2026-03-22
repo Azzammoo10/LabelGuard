@@ -1,0 +1,159 @@
+/* ─── Google Fonts ────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap');
+
+/* ─── Tailwind v4 ─────────────────────────────────────────────────────────── */
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+/* ─── Design Tokens — Color System (DESIGN.md Section 2) ─────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-base:        #0A0C0F;   /* Near-black, main background        */
+  --bg-surface:     #111418;   /* Card / panel background            */
+  --bg-elevated:    #1A1E25;   /* Elevated elements, inputs          */
+  --bg-hover:       #1F242D;   /* Hover states                       */
+
+  /* Borders */
+  --border-subtle:  #1E2530;   /* Dividers, card borders             */
+  --border-default: #2A3340;   /* Input borders                      */
+  --border-focus:   #3B82F6;   /* Focus rings                        */
+
+  /* Accent — Electric Blue */
+  --accent-primary: #3B82F6;   /* Primary accent                     */
+  --accent-glow:    #3B82F620; /* Glow effect for accent             */
+  --accent-subtle:  #1D3557;   /* Subtle accent backgrounds          */
+
+  /* Status Colors */
+  --status-success: #10B981;   /* Valid / processed                  */
+  --status-warning: #F59E0B;   /* Invalid / flagged                  */
+  --status-error:   #EF4444;   /* Error states                       */
+  --status-info:    #6366F1;   /* Info / neutral badges              */
+
+  /* Typography */
+  --text-primary:   #E8EDF3;   /* Main text                          */
+  --text-secondary: #8B95A3;   /* Secondary / labels                 */
+  --text-muted:     #4A5568;   /* Disabled / placeholder             */
+  --text-accent:    #3B82F6;   /* Accent text                        */
+
+  /* Trust Badges */
+  --badge-internal: #1A2744;   /* Internal Use Only                  */
+  --badge-secure:   #0D2818;   /* Client-Side Secure                 */
+  --badge-zero:     #1A1040;   /* Zero Data Retention                */
+
+  /* Typography — Font Families */
+  --font-display:  'Syne', sans-serif;
+  --font-mono:     'IBM Plex Mono', monospace;
+  --font-body:     'Syne', sans-serif;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Border Radius */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Shadows */
+  --shadow-card:  0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-subtle);
+  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  --shadow-glow:  0 0 16px var(--accent-glow);
+
+  /* Transitions */
+  --transition-fast: 0.1s ease-out;
+  --transition-base: 0.2s ease-out;
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Keyframes ───────────────────────────────────────────────────────────── */
+
+/* Status bar: slide in from left (DESIGN.md Section 6) */
+@keyframes statusSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Output area: fade in after processing (DESIGN.md Section 6) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Copy All: scale pop on click */
+@keyframes copyPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Copy All: checkmark scale-in */
+@keyframes checkIn {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60%  { transform: scale(1.25) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* ── Coming Soon badge ─────────────────────────────────────────────── */
+
+@keyframes soonPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+.soon-dot {
+  display:          inline-block;
+  width:            5px;
+  height:           5px;
+  border-radius:    50%;
+  background-color: #f59e0b;
+  animation:        soonPulse 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soon-dot { animation: none; }
+}

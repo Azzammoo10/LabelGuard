@@ -1,0 +1,420 @@
+{
+  "_metadata": {
+    "project": "AXA OneTrust — MS16 Auto-Labeling Test Platform",
+    "version": "1.0.0",
+    "description": "Professional synthetic data pool for financial SIT content generation. All data is fictional and algorithmically structured. No real financial data included.",
+    "standards": {
+      "IBAN": "ISO 13616 — MOD-97 compliant",
+      "SWIFT_BIC": "ISO 9362 — 8 or 11 characters",
+      "CreditCard": "Luhn Algorithm compliant",
+      "ABA": "ABA Routing Number — 3-7-1 checksum"
+    },
+    "usage": "Feed this file into sitGenerator.ts as the static data pool. The generator randomizes combinations on every Generate click."
+  },
+
+  "companies": {
+    "fr": [
+      { "name": "NorthBridge Consulting SARL",     "city": "Paris",     "country": "France" },
+      { "name": "Meridian Tech Solutions SAS",      "city": "Lyon",      "country": "France" },
+      { "name": "Atlas Finance Group SA",           "city": "Marseille", "country": "France" },
+      { "name": "Lumière Digitale SARL",            "city": "Bordeaux",  "country": "France" },
+      { "name": "Vecteur Conseil SAS",              "city": "Toulouse",  "country": "France" },
+      { "name": "Horizon Capital SA",               "city": "Nice",      "country": "France" },
+      { "name": "Summit Advisory SARL",             "city": "Nantes",    "country": "France" },
+      { "name": "Nexus Partners SAS",               "city": "Strasbourg","country": "France" },
+      { "name": "Delta Finance SA",                 "city": "Rennes",    "country": "France" },
+      { "name": "Omega Consulting SARL",            "city": "Montpellier","country": "France" },
+      { "name": "Prism Solutions SAS",              "city": "Lille",     "country": "France" },
+      { "name": "Vertex Capital SA",                "city": "Grenoble",  "country": "France" },
+      { "name": "Zenith Advisory SARL",             "city": "Dijon",     "country": "France" },
+      { "name": "Apex Consulting SAS",              "city": "Reims",     "country": "France" },
+      { "name": "Stellar Finance SA",               "city": "Angers",    "country": "France" },
+      { "name": "Pinnacle Group SARL",              "city": "Metz",      "country": "France" },
+      { "name": "Eclipse Partners SAS",             "city": "Brest",     "country": "France" },
+      { "name": "Aurora Conseil SA",                "city": "Le Havre",  "country": "France" },
+      { "name": "Nova Finance SARL",                "city": "Tours",     "country": "France" },
+      { "name": "Titan Advisory SAS",               "city": "Clermont-Ferrand", "country": "France" },
+      { "name": "Quantum Solutions SA",             "city": "Amiens",    "country": "France" },
+      { "name": "Matrix Consulting SARL",           "city": "Rouen",     "country": "France" },
+      { "name": "Fusion Capital SAS",               "city": "Nancy",     "country": "France" },
+      { "name": "Dynamics Finance SA",              "city": "Caen",      "country": "France" },
+      { "name": "Synergy Advisory SARL",            "city": "Orléans",   "country": "France" },
+      { "name": "Catalyst Partners SAS",            "city": "Poitiers",  "country": "France" },
+      { "name": "Momentum Capital SA",              "city": "Avignon",   "country": "France" },
+      { "name": "Clarity Conseil SARL",             "city": "Pau",       "country": "France" },
+      { "name": "Insight Finance SAS",              "city": "Limoges",   "country": "France" },
+      { "name": "Leverage Advisory SA",             "city": "Besançon",  "country": "France" }
+    ],
+    "en": [
+      { "name": "NorthBridge Consulting Ltd",       "city": "London",    "country": "United Kingdom" },
+      { "name": "Meridian Tech Solutions Ltd",      "city": "Manchester","country": "United Kingdom" },
+      { "name": "Atlas Finance Group plc",          "city": "Frankfurt", "country": "Germany" },
+      { "name": "Lumiere Digital Ltd",              "city": "Amsterdam", "country": "Netherlands" },
+      { "name": "Vecteur Advisory Ltd",             "city": "Brussels",  "country": "Belgium" },
+      { "name": "Horizon Capital Group",            "city": "Madrid",    "country": "Spain" },
+      { "name": "Summit Partners Ltd",              "city": "Milan",     "country": "Italy" },
+      { "name": "Nexus Financial Ltd",              "city": "Vienna",    "country": "Austria" },
+      { "name": "Delta Capital Ltd",                "city": "Zurich",    "country": "Switzerland" },
+      { "name": "Omega Advisory Group",             "city": "Dublin",    "country": "Ireland" },
+      { "name": "Prism Solutions Ltd",              "city": "Lisbon",    "country": "Portugal" },
+      { "name": "Vertex Capital plc",               "city": "Stockholm", "country": "Sweden" },
+      { "name": "Zenith Financial Ltd",             "city": "Oslo",      "country": "Norway" },
+      { "name": "Apex Consulting Group",            "city": "Copenhagen","country": "Denmark" },
+      { "name": "Stellar Finance plc",              "city": "Warsaw",    "country": "Poland" },
+      { "name": "Pinnacle Advisory Ltd",            "city": "Prague",    "country": "Czech Republic" },
+      { "name": "Eclipse Partners Ltd",             "city": "Budapest",  "country": "Hungary" },
+      { "name": "Aurora Capital Group",             "city": "Bucharest", "country": "Romania" },
+      { "name": "Nova Finance Ltd",                 "city": "Helsinki",  "country": "Finland" },
+      { "name": "Titan Advisory plc",               "city": "Athens",    "country": "Greece" },
+      { "name": "Quantum Solutions Ltd",            "city": "New York",  "country": "United States" },
+      { "name": "Matrix Consulting plc",            "city": "Chicago",   "country": "United States" },
+      { "name": "Fusion Capital Ltd",               "city": "Toronto",   "country": "Canada" },
+      { "name": "Dynamics Finance Group",           "city": "Sydney",    "country": "Australia" },
+      { "name": "Synergy Partners Ltd",             "city": "Singapore", "country": "Singapore" },
+      { "name": "Catalyst Advisory plc",            "city": "Tokyo",     "country": "Japan" },
+      { "name": "Momentum Finance Ltd",             "city": "Dubai",     "country": "UAE" },
+      { "name": "Clarity Consulting Group",         "city": "Sao Paulo", "country": "Brazil" },
+      { "name": "Insight Capital Ltd",              "city": "Seoul",     "country": "South Korea" },
+      { "name": "Leverage Advisory plc",            "city": "Hong Kong", "country": "Hong Kong" }
+    ]
+  },
+
+  "persons": {
+    "fr": [
+      { "firstName": "Sophie",       "lastName": "Martin",     "title": "Mme",  "role": "Directrice Financière" },
+      { "firstName": "Pierre",       "lastName": "Durand",     "title": "M.",   "role": "Responsable Comptabilité" },
+      { "firstName": "Claire",       "lastName": "Moreau",     "title": "Mme",  "role": "Chargée de Paiements" },
+      { "firstName": "Antoine",      "lastName": "Lefebvre",   "title": "M.",   "role": "Directeur Achats" },
+      { "firstName": "Hélène",       "lastName": "Bernard",    "title": "Mme",  "role": "Responsable Trésorerie" },
+      { "firstName": "Marc",         "lastName": "Dupont",     "title": "M.",   "role": "Analyste Financier" },
+      { "firstName": "Isabelle",     "lastName": "Renard",     "title": "Mme",  "role": "Contrôleur de Gestion" },
+      { "firstName": "François",     "lastName": "Lemaire",    "title": "M.",   "role": "Responsable Fournisseurs" },
+      { "firstName": "Nathalie",     "lastName": "Girard",     "title": "Mme",  "role": "Coordinatrice Finance" },
+      { "firstName": "David",        "lastName": "Moreau",     "title": "M.",   "role": "Chef de Projet Finance" },
+      { "firstName": "Camille",      "lastName": "Vidal",      "title": "Mme",  "role": "Responsable Paie" },
+      { "firstName": "Thomas",       "lastName": "Bernard",    "title": "M.",   "role": "Auditeur Interne" },
+      { "firstName": "Laure",        "lastName": "Petit",      "title": "Mme",  "role": "Analyste Risques" },
+      { "firstName": "Julien",       "lastName": "Mercier",    "title": "M.",   "role": "Responsable Budget" },
+      { "firstName": "Anne-Sophie",  "lastName": "Leclerc",    "title": "Mme",  "role": "Directrice Juridique" },
+      { "firstName": "Bruno",        "lastName": "Chassagne",  "title": "M.",   "role": "Responsable Conformité" },
+      { "firstName": "Céline",       "lastName": "Marcot",     "title": "Mme",  "role": "Chargée RH" },
+      { "firstName": "Denis",        "lastName": "Faure",      "title": "M.",   "role": "Directeur Général" },
+      { "firstName": "Marie-Claire", "lastName": "Rousseau",   "title": "Mme",  "role": "Secrétaire Générale" },
+      { "firstName": "Jean-Pierre",  "lastName": "Fontaine",   "title": "M.",   "role": "Responsable IT" },
+      { "firstName": "Sylvie",       "lastName": "Jacquet",    "title": "Mme",  "role": "Directrice Communication" },
+      { "firstName": "Laurent",      "lastName": "Fontaine",   "title": "M.",   "role": "Responsable Commercial" },
+      { "firstName": "Élodie",       "lastName": "Martin",     "title": "Mme",  "role": "Chargée de Clientèle" },
+      { "firstName": "Alexandre",    "lastName": "Dubois",     "title": "M.",   "role": "Analyste Data" },
+      { "firstName": "Valérie",      "lastName": "Legrand",    "title": "Mme",  "role": "Responsable Qualité" }
+    ],
+    "en": [
+      { "firstName": "Sophie",    "lastName": "Martin",    "title": "Ms.",  "role": "Chief Financial Officer" },
+      { "firstName": "Peter",     "lastName": "Douglas",   "title": "Mr.",  "role": "Head of Accounting" },
+      { "firstName": "Claire",    "lastName": "Moore",     "title": "Ms.",  "role": "Payments Manager" },
+      { "firstName": "Anthony",   "lastName": "Lambert",   "title": "Mr.",  "role": "Procurement Director" },
+      { "firstName": "Helen",     "lastName": "Bernard",   "title": "Ms.",  "role": "Treasury Manager" },
+      { "firstName": "Mark",      "lastName": "Dupont",    "title": "Mr.",  "role": "Financial Analyst" },
+      { "firstName": "Isabel",    "lastName": "Reynolds",  "title": "Ms.",  "role": "Management Controller" },
+      { "firstName": "Francis",   "lastName": "Lemaire",   "title": "Mr.",  "role": "Vendor Manager" },
+      { "firstName": "Natalie",   "lastName": "Gerard",    "title": "Ms.",  "role": "Finance Coordinator" },
+      { "firstName": "David",     "lastName": "Morgan",    "title": "Mr.",  "role": "Finance Project Manager" },
+      { "firstName": "Camille",   "lastName": "Vidal",     "title": "Ms.",  "role": "Payroll Manager" },
+      { "firstName": "Thomas",    "lastName": "Bernard",   "title": "Mr.",  "role": "Internal Auditor" },
+      { "firstName": "Laura",     "lastName": "Petit",     "title": "Ms.",  "role": "Risk Analyst" },
+      { "firstName": "Julian",    "lastName": "Mercer",    "title": "Mr.",  "role": "Budget Manager" },
+      { "firstName": "Anne",      "lastName": "Wilson",    "title": "Ms.",  "role": "Legal Director" },
+      { "firstName": "Brian",     "lastName": "Chase",     "title": "Mr.",  "role": "Compliance Manager" },
+      { "firstName": "Celine",    "lastName": "Marcot",    "title": "Ms.",  "role": "HR Officer" },
+      { "firstName": "Dennis",    "lastName": "Ford",      "title": "Mr.",  "role": "General Manager" },
+      { "firstName": "Mary",      "lastName": "Ross",      "title": "Ms.",  "role": "Secretary General" },
+      { "firstName": "Jean",      "lastName": "Fontaine",  "title": "Mr.",  "role": "IT Manager" },
+      { "firstName": "Sylvia",    "lastName": "Jackson",   "title": "Ms.",  "role": "Communications Director" },
+      { "firstName": "Lawrence",  "lastName": "Ford",      "title": "Mr.",  "role": "Sales Manager" },
+      { "firstName": "Elaine",    "lastName": "Martin",    "title": "Ms.",  "role": "Customer Relations Officer" },
+      { "firstName": "Alexander", "lastName": "Dubois",    "title": "Mr.",  "role": "Data Analyst" },
+      { "firstName": "Valerie",   "lastName": "Grant",     "title": "Ms.",  "role": "Quality Manager" }
+    ]
+  },
+
+  "banks": {
+    "europe": [
+      { "name": "Deutsche Bank",          "country": "DE", "swift": "DEUTDEFF", "city": "Frankfurt" },
+      { "name": "BNP Paribas",            "country": "FR", "swift": "BNPAFRPP", "city": "Paris" },
+      { "name": "Société Générale",       "country": "FR", "swift": "SOGEFRPP", "city": "Paris" },
+      { "name": "Crédit Agricole",        "country": "FR", "swift": "AGRIFRPP", "city": "Paris" },
+      { "name": "LCL",                    "country": "FR", "swift": "CRLYFRPP", "city": "Paris" },
+      { "name": "CIC",                    "country": "FR", "swift": "CMCIFRPP", "city": "Paris" },
+      { "name": "HSBC France",            "country": "FR", "swift": "CCFRFRPP", "city": "Paris" },
+      { "name": "ING Bank",               "country": "NL", "swift": "INGBNL2A", "city": "Amsterdam" },
+      { "name": "ABN AMRO",               "country": "NL", "swift": "ABNANL2A", "city": "Amsterdam" },
+      { "name": "Rabobank",               "country": "NL", "swift": "RABONL2U", "city": "Utrecht" },
+      { "name": "KBC Bank",               "country": "BE", "swift": "KREDBEBB", "city": "Brussels" },
+      { "name": "BNP Paribas Fortis",     "country": "BE", "swift": "GEBABEBB", "city": "Brussels" },
+      { "name": "UniCredit",              "country": "IT", "swift": "UNCRITMM", "city": "Milan" },
+      { "name": "Intesa Sanpaolo",        "country": "IT", "swift": "BCITITMM", "city": "Milan" },
+      { "name": "Santander",              "country": "ES", "swift": "BSCHESBB", "city": "Madrid" },
+      { "name": "BBVA",                   "country": "ES", "swift": "BBVAESBB", "city": "Madrid" },
+      { "name": "Commerzbank",            "country": "DE", "swift": "COBADEFF", "city": "Frankfurt" },
+      { "name": "DZ Bank",                "country": "DE", "swift": "GENODEFF", "city": "Frankfurt" },
+      { "name": "Erste Bank",             "country": "AT", "swift": "GIBAATWG", "city": "Vienna" },
+      { "name": "Raiffeisen Bank",        "country": "AT", "swift": "RZOOAT2L", "city": "Vienna" },
+      { "name": "UBS",                    "country": "CH", "swift": "UBSWCHZH", "city": "Zurich" },
+      { "name": "Credit Suisse",          "country": "CH", "swift": "CRESCHZZ", "city": "Zurich" },
+      { "name": "Nordea",                 "country": "SE", "swift": "NDEASESS", "city": "Stockholm" },
+      { "name": "Handelsbanken",          "country": "SE", "swift": "HANDSESS", "city": "Stockholm" },
+      { "name": "DNB Bank",               "country": "NO", "swift": "DNBANOKKXXX", "city": "Oslo" },
+      { "name": "Danske Bank",            "country": "DK", "swift": "DABADKKK", "city": "Copenhagen" },
+      { "name": "AIB",                    "country": "IE", "swift": "AIBKIE2D", "city": "Dublin" },
+      { "name": "Bank of Ireland",        "country": "IE", "swift": "BOFIIE2D", "city": "Dublin" },
+      { "name": "Millennium BCP",         "country": "PT", "swift": "BCOMPTPL", "city": "Lisbon" },
+      { "name": "Caixa Geral",            "country": "PT", "swift": "CGDIPTPL", "city": "Lisbon" }
+    ],
+    "us": [
+      { "name": "Bank of America",        "aba": "026009593", "swift": "BOFAUS3N", "city": "New York" },
+      { "name": "JPMorgan Chase",         "aba": "021000021", "swift": "CHASUS33", "city": "New York" },
+      { "name": "Wells Fargo",            "aba": "121000248", "swift": "WFBIUS6S", "city": "San Francisco" },
+      { "name": "Citibank",               "aba": "021272655", "swift": "CITIUS33", "city": "New York" },
+      { "name": "US Bank",                "aba": "091000022", "swift": "USBKUS44", "city": "Minneapolis" },
+      { "name": "PNC Bank",               "aba": "043000096", "swift": "PNCCUS33", "city": "Pittsburgh" },
+      { "name": "Capital One",            "aba": "056073612", "swift": "HIBKUS44", "city": "McLean" },
+      { "name": "TD Bank",                "aba": "031101266", "swift": "NRTHUS33", "city": "Cherry Hill" },
+      { "name": "Truist Bank",            "aba": "053101121", "swift": "BRBTUS33", "city": "Charlotte" },
+      { "name": "Regions Bank",           "aba": "062000019", "swift": "UPNBUS44", "city": "Birmingham" },
+      { "name": "Fifth Third Bank",       "aba": "042000314", "swift": "FTBCUS3C", "city": "Cincinnati" },
+      { "name": "KeyBank",                "aba": "041001039", "swift": "KEYBUS33", "city": "Cleveland" },
+      { "name": "Huntington Bank",        "aba": "044000024", "swift": "HUNTUS33", "city": "Columbus" },
+      { "name": "Comerica Bank",          "aba": "072000096", "swift": "MNBDUS33", "city": "Dallas" },
+      { "name": "Silicon Valley Bank",    "aba": "121140399", "swift": "SVBKUS6S", "city": "Santa Clara" }
+    ]
+  },
+
+  "iban_country_specs": {
+    "FR": { "length": 27, "bban_format": "5n4n11n2n",  "example_prefix": "FR76" },
+    "DE": { "length": 22, "bban_format": "8n10n",       "example_prefix": "DE" },
+    "GB": { "length": 22, "bban_format": "4a6n8n",      "example_prefix": "GB" },
+    "ES": { "length": 24, "bban_format": "4n4n2n10n",   "example_prefix": "ES" },
+    "IT": { "length": 27, "bban_format": "1a5n5n12n",   "example_prefix": "IT" },
+    "BE": { "length": 16, "bban_format": "3n7n2n",      "example_prefix": "BE" },
+    "NL": { "length": 18, "bban_format": "4a10n",       "example_prefix": "NL" },
+    "PT": { "length": 25, "bban_format": "4n4n11n2n",   "example_prefix": "PT" },
+    "AT": { "length": 20, "bban_format": "5n11n",       "example_prefix": "AT" },
+    "CH": { "length": 21, "bban_format": "5n12n",       "example_prefix": "CH" }
+  },
+
+  "card_prefixes": {
+    "visa":        ["4532", "4916", "4539", "4485", "4716", "4024", "4111", "4012"],
+    "mastercard":  ["5425", "5234", "5341", "5512", "5167", "5100", "5200", "5300"],
+    "maestro":     ["6304", "6759", "6761", "6762", "6763", "6304", "6390"],
+    "visa_debit":  ["4462", "4917", "4913", "4508", "4844", "4026"]
+  },
+
+  "aba_fed_prefixes": [
+    "01", "02", "03", "04", "05", "06", "07", "08",
+    "09", "10", "11", "12", "21", "22", "23", "24",
+    "25", "26", "27", "28", "29", "30", "31", "32"
+  ],
+
+  "amounts": {
+    "small":   ["1 200,00", "2 450,00", "3 780,00", "4 100,00", "5 890,00"],
+    "medium":  ["12 500,00", "18 750,00", "24 300,00", "31 600,00", "47 500,00"],
+    "large":   ["85 000,00", "124 500,00", "167 800,00", "215 000,00", "312 000,00"],
+    "xlarge":  ["450 000,00", "680 000,00", "925 000,00", "1 200 000,00", "2 500 000,00"]
+  },
+
+  "currencies": ["EUR", "USD", "GBP", "CHF", "SEK", "NOK", "DKK", "PLN"],
+
+  "document_scenarios": {
+    "iban": {
+      "fr": [
+        "Formulaire de virement bancaire fournisseur",
+        "Demande de remboursement frais professionnels",
+        "Instruction de paiement contrat prestation",
+        "Ordre de virement — Règlement facture",
+        "Transfert inter-comptes — Direction Finance",
+        "Paiement acompte contrat annuel",
+        "Remboursement note de frais déplacement",
+        "Récapitulatif virements fournisseurs trimestriels"
+      ],
+      "en": [
+        "Supplier Wire Transfer Form",
+        "Employee Expense Reimbursement Request",
+        "Contract Payment Instruction",
+        "Invoice Settlement Order",
+        "Inter-Account Transfer — Finance Department",
+        "Annual Contract Advance Payment",
+        "Business Travel Expense Reimbursement",
+        "Quarterly Supplier Payment Summary"
+      ]
+    },
+    "creditCard": {
+      "fr": [
+        "Enregistrement paiement client",
+        "Récapitulatif transactions hebdomadaires",
+        "Rapport paiements département commercial",
+        "Journal des transactions carte corporate",
+        "Relevé paiements en ligne — Plateforme interne",
+        "Rapport audit transactions financières",
+        "Synthèse règlements clients — Trimestre",
+        "Registre paiements fournisseurs externes"
+      ],
+      "en": [
+        "Customer Payment Registration",
+        "Weekly Transaction Summary",
+        "Commercial Department Payment Report",
+        "Corporate Card Transaction Log",
+        "Online Payment Statement — Internal Platform",
+        "Financial Transaction Audit Report",
+        "Quarterly Client Settlement Summary",
+        "External Supplier Payment Register"
+      ]
+    },
+    "euDebitCard": {
+      "fr": [
+        "Registre cartes de débit professionnelles",
+        "Fiche intégration fournisseur — Données bancaires",
+        "Rapport utilisation cartes corporate",
+        "Inventaire moyens de paiement — Équipe Achats",
+        "Synthèse cartes actives — Direction Finances",
+        "Rapport mensuel dépenses cartes professionnelles",
+        "Registre attribution cartes collaborateurs",
+        "Audit annuel moyens de paiement entreprise"
+      ],
+      "en": [
+        "Professional Debit Card Register",
+        "Supplier Integration Form — Banking Details",
+        "Corporate Card Usage Report",
+        "Payment Methods Inventory — Procurement Team",
+        "Active Cards Summary — Finance Department",
+        "Monthly Professional Card Expense Report",
+        "Employee Card Allocation Register",
+        "Annual Corporate Payment Methods Audit"
+      ]
+    },
+    "swift": {
+      "fr": [
+        "Répertoire correspondants bancaires internationaux",
+        "Instruction paiement international — Zone SEPA",
+        "Registre banques partenaires — Réseau AXA",
+        "Fiche correspondant bancaire étranger",
+        "Annuaire BIC — Département Trésorerie",
+        "Rapport virements internationaux — Trimestre",
+        "Répertoire banques zone euro et hors-euro",
+        "Guide codes SWIFT partenaires financiers"
+      ],
+      "en": [
+        "International Banking Correspondents Directory",
+        "SEPA International Payment Instruction",
+        "Partner Banks Register — AXA Network",
+        "Foreign Banking Correspondent Profile",
+        "BIC Directory — Treasury Department",
+        "Quarterly International Wire Transfer Report",
+        "Euro and Non-Euro Zone Banks Directory",
+        "SWIFT Code Guide — Financial Partners"
+      ]
+    },
+    "aba": {
+      "fr": [
+        "Répertoire banques partenaires — Réseau AXA États-Unis",
+        "Ordre de paiement — Filiale AXA Amérique du Nord",
+        "Registre correspondants bancaires — Zone USD",
+        "Fiche banque partenaire Amérique du Nord",
+        "Instruction virement ACH — Réseau fédéral américain",
+        "Rapport paiements domestiques — Réseau bancaire US",
+        "Annuaire routing numbers partenaires américains",
+        "Guide paiements domestiques États-Unis — AXA Finance"
+      ],
+      "en": [
+        "Partner Banks Directory — AXA US Network",
+        "Payment Order — AXA North America Branch",
+        "Banking Correspondents Register — USD Zone",
+        "North American Partner Bank Profile",
+        "ACH Wire Transfer Instruction — US Federal Network",
+        "Domestic Payment Report — US Banking Network",
+        "US Partner Routing Numbers Directory",
+        "US Domestic Payment Guide — AXA Finance"
+      ]
+    }
+  },
+
+  "reference_formats": {
+    "contract":    "CTR-{YEAR}-{5DIGITS}",
+    "invoice":     "FAC-{YEAR}-{5DIGITS}",
+    "payment":     "PAY-{YEAR}-{5DIGITS}",
+    "internal":    "AXA-INT-{YEAR}-{5DIGITS}",
+    "supplier":    "SUPP-{YEAR}-{5DIGITS}",
+    "reinsurance": "RE-{YEAR}-{5DIGITS}",
+    "employee_id": "AXA-FR-{6DIGITS}"
+  },
+
+  "departments": {
+    "fr": [
+      "Direction Financière",
+      "Direction des Achats",
+      "Direction de la Trésorerie",
+      "Direction Comptabilité Fournisseurs",
+      "Direction Contrôle de Gestion",
+      "Direction Audit Interne",
+      "Direction Juridique et Conformité",
+      "Direction des Ressources Humaines",
+      "Direction des Systèmes d'Information",
+      "Direction Générale"
+    ],
+    "en": [
+      "Finance Department",
+      "Procurement Department",
+      "Treasury Department",
+      "Accounts Payable Department",
+      "Management Control Department",
+      "Internal Audit Department",
+      "Legal and Compliance Department",
+      "Human Resources Department",
+      "Information Systems Department",
+      "General Management"
+    ]
+  },
+
+  "card_expiry_pool": [
+    "03/26", "06/26", "09/26", "12/26",
+    "03/27", "06/27", "09/27", "11/27",
+    "02/28", "05/28", "08/28", "10/28",
+    "01/29", "04/29", "07/29", "12/29"
+  ],
+
+  "purview_detection_rules": {
+    "iban": {
+      "sit_name": "International Banking Account Number (IBAN)",
+      "detection_scope": "All IBAN for 68 countries",
+      "confidence": "High",
+      "variant_A": { "occurrences": 1,  "expected_label": "Confidentiel" },
+      "variant_B": { "occurrences": 10, "expected_label": "Secret" }
+    },
+    "credit_card": {
+      "sit_name": "Credit Card Number",
+      "detection_scope": "Credit card number worldwide detection",
+      "confidence": "High",
+      "variant_A": { "occurrences": 1,  "expected_label": "Confidentiel" },
+      "variant_B": { "occurrences": 10, "expected_label": "Secret" }
+    },
+    "eu_debit_card": {
+      "sit_name": "EU Debit Card Number",
+      "detection_scope": "Europe debit card number detection",
+      "confidence": "High",
+      "variant_A": { "occurrences": 1,  "expected_label": "Confidentiel" },
+      "variant_B": { "occurrences": 10, "expected_label": "Secret" }
+    },
+    "swift": {
+      "sit_name": "SWIFT Code",
+      "detection_scope": "Bank communication data",
+      "confidence": "Medium",
+      "variant_A": { "occurrences": 1,  "expected_label": "Confidentiel" },
+      "variant_B": { "occurrences": 10, "expected_label": "Secret" }
+    },
+    "aba": {
+      "sit_name": "ABA Routing Number",
+      "detection_scope": "US bank routing data",
+      "confidence": "Medium",
+      "variant_A": { "occurrences": 1,  "expected_label": "Confidentiel" },
+      "variant_B": { "occurrences": 10, "expected_label": "Secret" }
+    }
+  }
+}
