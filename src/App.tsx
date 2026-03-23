@@ -4,9 +4,16 @@ import About from './components/modules/About/About'
 import SITPage from './components/modules/AutoLabeling/SITPage'
 import TestDocuments from './components/modules/TestDocuments/index'
 import type { ModuleId } from './types/index'
+import { useAuth } from './contexts/AuthContext'
+import SplashScreen from './components/auth/SplashScreen'
+import LoginPage from './components/auth/LoginPage'
 
 function App() {
+  const { user, isLoading } = useAuth()
   const [activeModule, setActiveModule] = useState<ModuleId>('iban')
+
+  if (isLoading) return <SplashScreen />
+  if (!user) return <LoginPage />
 
   const isSITModule = ['iban', 'credit-card', 'eu-debit-card', 'swift-code', 'aba-routing'].includes(activeModule)
 

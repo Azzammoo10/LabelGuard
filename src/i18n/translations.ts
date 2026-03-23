@@ -112,6 +112,15 @@ type TranslationsShape = {
   tdDocConfidentialityTitle: string
   tdDocConfidentialityText: string
   bottomBannerText: string
+  email: string
+  password: string
+  signIn: string
+  signingIn: string
+  invalidCredentials: string
+  restrictedAccess: string
+  showPassword: string
+  hidePassword: string
+  signOut: string
 }
 
 const translations: Record<'fr' | 'en', TranslationsShape> = {
@@ -237,6 +246,15 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     tdDocConfidentialityTitle: 'Notice de confidentialité',
     tdDocConfidentialityText: 'Les données présentées dans ce document sont entièrement fictives et synthétiques. Elles ont été générées algorithmiquement dans le cadre du projet OneTrust CM16 d\'AXA pour valider le bon fonctionnement de Microsoft Purview Auto-Labeling. Toute ressemblance avec des données réelles serait purement fortuite. Ce document ne doit pas quitter le périmètre de test autorisé.',
     bottomBannerText: 'Plateforme de Test : Données synthétiques uniquement — Zéro risque de fuite de données',
+    email: "Email ou Nom d'utilisateur",
+    password: "Mot de passe",
+    signIn: "Se connecter",
+    signingIn: "Connexion...",
+    invalidCredentials: "Email ou mot de passe incorrect.",
+    restrictedAccess: "Accès réservé — AXA Interne",
+    showPassword: "Afficher",
+    hidePassword: "Masquer",
+    signOut: "Déconnexion",
   },
   en: {
     generateBtn: 'Generate Content',
@@ -351,6 +369,15 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     tdDocConfidentialityTitle: 'Confidentiality Notice',
     tdDocConfidentialityText: 'The data presented in this document is entirely fictional and synthetic. It was algorithmically generated as part of AXA\'s OneTrust CM16 project to validate Microsoft Purview Auto-Labeling. Any resemblance to real data is purely coincidental. This document must not leave the authorized test perimeter.',
     bottomBannerText: ' Test Platform: Synthetic data only — No data leakage risk',
+    email: "Email or Username",
+    password: "Password",
+    signIn: "Sign In",
+    signingIn: "Signing in...",
+    invalidCredentials: "Invalid email or password.",
+    restrictedAccess: "Restricted Access — AXA Internal",
+    showPassword: "Show",
+    hidePassword: "Hide",
+    signOut: "Sign Out",
   }
 }
 

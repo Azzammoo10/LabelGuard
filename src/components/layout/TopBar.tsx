@@ -4,6 +4,8 @@ import { useLanguage } from '../../hooks/useLanguage'
 import type { Language } from '../../contexts/LanguageContext'
 import { useTranslations } from '../../i18n/translations'
 import { exportGlobalReport } from '../../utils/exportReport'
+import { useAuth } from '../../contexts/AuthContext'
+import { LogOut } from 'lucide-react'
 
 interface TopBarProps {
   onMenuToggle: () => void
@@ -34,7 +36,16 @@ const TRUST_BADGES = [
 const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, menuOpen }) => {
   const { language, setLanguage } = useLanguage()
   const t = useTranslations()
+  const { logout } = useAuth()
   const [isExporting, setIsExporting] = useState(false)
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+    } catch {
+      // fail silently or handle
+    }
+  }
 
   const handleExport = async () => {
     setIsExporting(true)
@@ -149,6 +160,27 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, menuOpen }) => {
             </span>
           ))}
         </div>
+
+        {/* ── Logout Button ──────────────────────────────────────────────── */}
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-1.5 px-2 py-1.5 rounded-md text-xs font-mono font-semibold transition-colors cursor-pointer"
+          style={{
+            color: 'var(--text-secondary)',
+            backgroundColor: 'transparent',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--text-primary)'
+            e.currentTarget.style.backgroundColor = 'var(--bg-hover)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--text-secondary)'
+            e.currentTarget.style.backgroundColor = 'transparent'
+          }}
+        >
+          <LogOut size={13} />
+          <span className="hidden md:inline">{t.signOut}</span>
+        </button>
       </div>
     </header>
   )
