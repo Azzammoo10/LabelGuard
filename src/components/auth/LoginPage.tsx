@@ -85,7 +85,7 @@ const LoginPage: React.FC = () => {
                 disabled={isSubmitting}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="px-3 py-2 rounded-lg font-sans text-sm border focus:outline-none transition-colors"
+                className="px-3 py-2 rounded-lg font-sans text-base border focus:outline-none transition-colors"
                 style={{
                   backgroundColor: 'var(--bg-elevated)',
                   borderColor: 'var(--border-default)',
@@ -111,7 +111,7 @@ const LoginPage: React.FC = () => {
                   disabled={isSubmitting}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 pr-10 rounded-lg font-sans text-sm border focus:outline-none transition-colors"
+                  className="w-full px-3 py-2 pr-10 rounded-lg font-sans text-base border focus:outline-none transition-colors"
                   style={{
                     backgroundColor: 'var(--bg-elevated)',
                     borderColor: 'var(--border-default)',
