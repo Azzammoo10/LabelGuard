@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 import { account } from '../lib/appwrite'
 import type { Models } from 'appwrite'
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           new Promise((resolve) => setTimeout(resolve, 600)),
         ])
         setUser(userData)
-      } catch (error) {
+      } catch {
         setUser(null)
       } finally {
         setIsLoading(false)
