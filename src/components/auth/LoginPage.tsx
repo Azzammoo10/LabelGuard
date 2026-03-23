@@ -22,8 +22,9 @@ const LoginPage: React.FC = () => {
       // Auto-append domain if missing '@'
       const loginEmail = email.includes('@') ? email : `${email}@axa.com`
       await login(loginEmail, password)
-    } catch (err) {
-      setError(t.invalidCredentials)
+    } catch (err: unknown) {
+      console.error('Login error:', err)
+      setError(err instanceof Error ? err.message : String(err))
       setPassword('') // Clear password on failure
     } finally {
       setIsSubmitting(false)
