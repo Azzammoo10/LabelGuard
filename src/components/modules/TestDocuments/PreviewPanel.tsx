@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Download, Loader2 } from 'lucide-react'
 import { useTranslations } from '../../../i18n/translations'
-import { useLanguage } from '../../../contexts/LanguageContext'
+import { useLanguage } from '../../../hooks/useLanguage'
 import type { DocumentFormat, VariantType } from './index'
 import { generateTestDocument } from '../../../utils/documentGenerators/index'
 

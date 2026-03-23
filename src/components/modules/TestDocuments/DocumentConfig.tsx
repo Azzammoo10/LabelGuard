@@ -1,6 +1,6 @@
-import { FileText, Table2, Presentation, Globe2 } from 'lucide-react'
+import { FileText, Table2, Presentation, Globe2, type LucideIcon } from 'lucide-react'
 import { useTranslations } from '../../../i18n/translations'
-import { useLanguage } from '../../../contexts/LanguageContext'
+import { useLanguage } from '../../../hooks/useLanguage'
 import type { DocumentFormat, VariantType } from './index'
 
 interface DocumentConfigProps {
@@ -14,7 +14,7 @@ export default function DocumentConfig({ variant, onVariantChange, format, onFor
   const t = useTranslations()
   const { language } = useLanguage()
 
-  const formatOptions: { id: DocumentFormat; icon: any; title: string; subtitle: string }[] = [
+  const formatOptions: { id: DocumentFormat; icon: LucideIcon; title: string; subtitle: string }[] = [
     { id: 'docx', icon: FileText,   title: 'DOCX', subtitle: 'Word' },
     { id: 'xlsx', icon: Table2,     title: 'XLSX', subtitle: 'Excel' },
     { id: 'pptx', icon: Presentation, title: 'PPTX', subtitle: 'PowerPoint' },

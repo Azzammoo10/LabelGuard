@@ -3,7 +3,7 @@ import { Copy, CheckCircle2, Loader2, ShieldAlert, Info, RefreshCw, FileDown } f
 import { FINANCIAL_SITS } from '../../../data/financial-sits'
 import { generateContent } from '../../../utils/sitGenerator'
 import { exportSITReport } from '../../../utils/exportReport'
-import { useLanguage } from '../../../contexts/LanguageContext'
+import { useLanguage } from '../../../hooks/useLanguage'
 import { useTranslations } from '../../../i18n/translations'
 import type { SITVariantType, ValidationStatus } from '../../../types'
 

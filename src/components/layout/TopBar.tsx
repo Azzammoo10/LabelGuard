@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Menu, FileDown, Loader2 } from 'lucide-react'
-import { useLanguage, type Language } from '../../contexts/LanguageContext'
+import { useLanguage } from '../../hooks/useLanguage'
+import type { Language } from '../../contexts/LanguageContext'
 import { useTranslations } from '../../i18n/translations'
 import { exportGlobalReport } from '../../utils/exportReport'
 

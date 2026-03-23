@@ -1,5 +1,5 @@
 import pptxgen from 'pptxgenjs'
-import type { GeneratedData } from './index'
+import type { GeneratedData, IbanData, CreditCardData, DebitCardData, SwiftData, AbaData } from './index'
 import type { VariantType } from '../../components/modules/TestDocuments/index'
 
 const PRIMARY_COLOR = '00008F'
@@ -14,21 +14,21 @@ const SIT_META: Record<string, { name: string, desc: string, label: string }> = 
 }
 
 export async function generatePPTDoc(
-  selectedSITs: string[], 
-  dataArrays: GeneratedData, 
+  selectedSITs: string[],
+  dataArrays: GeneratedData,
   language: 'fr' | 'en',
   variant: VariantType
 ): Promise<void> {
   const isFr = language === 'fr'
   const pptx = new pptxgen()
-  
+
   pptx.layout = 'LAYOUT_16x9'
-  
+
   const watermark = isFr ? 'DOCUMENT DE TEST — DONNÉES FICTIVES' : 'TEST DOCUMENT — FICTIONAL DATA'
   const footerText = `OneTrust CM16 | ${watermark}`
 
   // Helper for Slide Backgrounds & Footers
-  const addSlideMaster = (slide: any) => {
+  const addSlideMaster = (slide: { addText: (text: string, opts?: Record<string, unknown>) => unknown }) => {
     slide.addText(footerText, { x: 0.5, y: '92%', w: '90%', fontSize: 10, color: '999999', align: 'center' })
   }
 
@@ -44,7 +44,7 @@ export async function generatePPTDoc(
   addSlideMaster(noticeSlide)
   noticeSlide.addText(isFr ? 'Notice de Confidentialité' : 'Confidentiality Notice', { x: 0.5, y: 0.5, w: '90%', fontSize: 28, bold: true, color: PRIMARY_COLOR })
   noticeSlide.addText(
-    isFr 
+    isFr
       ? 'Les données présentées dans ce document sont entièrement fictives et synthétiques. Elles ont été générées algorithmiquement dans le cadre du projet OneTrust CM16 d\'AXA pour valider le bon fonctionnement de Microsoft Purview Auto-Labeling. Aucune donnée réelle n\'est utilisée.'
       : 'The data presented in this document is entirely fictional and synthetic. It was algorithmically generated as part of AXA\'s OneTrust CM16 project to validate Microsoft Purview Auto-Labeling. No real data is used.',
     { x: 0.5, y: 2.0, w: '90%', fontSize: 18, color: '333333' }
@@ -61,7 +61,7 @@ export async function generatePPTDoc(
     const ctxSlide = pptx.addSlide()
     addSlideMaster(ctxSlide)
     ctxSlide.addText(meta.name, { x: 0.5, y: 0.5, w: '90%', fontSize: 28, bold: true, color: PRIMARY_COLOR })
-    
+
     ctxSlide.addText('Contexte', { x: 0.5, y: 1.5, w: '90%', fontSize: 16, bold: true, color: '333333' })
     ctxSlide.addText(
       `Dans le cadre du projet OneTrust CM16, ce document présente les données de test pour la validation de la détection automatique de ${meta.name} par Microsoft Purview.`,
@@ -84,30 +84,41 @@ export async function generatePPTDoc(
     const dataSlide = pptx.addSlide()
     addSlideMaster(dataSlide)
     dataSlide.addText(`Données de Test — ${meta.name}`, { x: 0.5, y: 0.5, w: '90%', fontSize: 28, bold: true, color: PRIMARY_COLOR })
-    
+
     // Bottom Disclaimer
     dataSlide.addText('Données synthétiques — Test CM16 — Ne pas utiliser hors périmètre autorisé', { x: 0.5, y: 5.0, w: '90%', fontSize: 11, italic: true, color: '888888' })
 
-    const formatSITText = (item: any): string => {
-      if (sit === 'iban') return `IBAN: ${item.iban}\nBénéf: ${item.beneficiary}`
-      if (sit === 'credit-card') return `Carte de crédit: ${item.cardNumber}\nExpire: ${item.expiry}`
-      if (sit === 'eu-debit-card') return `Carte de débit: ${item.cardNumber}\nEmployé: ${item.holder}`
-      if (sit === 'swift-code') return `Code SWIFT/BIC: ${item.swift}\nBanque: ${item.bank.name}`
-      if (sit === 'aba-routing') return `ABA Routing Number: ${item.aba}\nBanque: ${item.bank.name}`
+    const formatSITText = (item: unknown): string => {
+      if (sit === 'iban') { const d = item as IbanData; return `IBAN: ${d.iban}\nBénéf: ${d.beneficiary}` }
+      if (sit === 'credit-card') { const d = item as CreditCardData; return `Carte de crédit: ${d.cardNumber}\nExpire: ${d.expiry}` }
+      if (sit === 'eu-debit-card') { const d = item as DebitCardData; return `Carte de débit: ${d.cardNumber}\nEmployé: ${d.holder}` }
+      if (sit === 'swift-code') { const d = item as SwiftData; return `Code SWIFT/BIC: ${d.swift}\nBanque: ${d.bank.name}` }
+      if (sit === 'aba-routing') { const d = item as AbaData; return `ABA Routing Number: ${d.aba}\nBanque: ${d.bank.name}` }
       return ''
     }
 
     if (variant === 'A') {
       const item = data[0]
       let text = `Occurrence 1 de 1 :\n─────────────────────────────\n`
-      if (sit === 'iban') text += `Bénéficiaire : ${(item as any).beneficiary}\nIBAN          : ${(item as any).iban}\nSWIFT         : ${(item as any).swift}\nMontant       : ${(item as any).amount} EUR\nRéférence     : ${(item as any).reference}`
-      else if (sit === 'credit-card') text += `Titulaire     : ${(item as any).cardholder}\nCarte de crédit : ${(item as any).cardNumber}\nExpiration    : ${(item as any).expiry}\nMontant       : ${(item as any).amount} EUR`
-      else if (sit === 'eu-debit-card') text += `Titulaire     : ${(item as any).holder}\nCarte de débit : ${(item as any).cardNumber}\nPlafond       : ${(item as any).limit} EUR`
-      else if (sit === 'swift-code') text += `Banque        : ${(item as any).bank.name}\nPays          : ${(item as any).country}\nCode SWIFT/BIC: ${(item as any).swift}`
-      else if (sit === 'aba-routing') text += `Banque        : ${(item as any).bank.name}\nABA Routing Number: ${(item as any).aba}\nVille         : ${(item as any).city}`
-      
+      if (sit === 'iban') {
+        const d = item as IbanData
+        text += `Bénéficiaire : ${d.beneficiary}\nIBAN          : ${d.iban}\nSWIFT         : ${d.swift}\nMontant       : ${d.amount} EUR\nRéférence     : ${d.reference}`
+      } else if (sit === 'credit-card') {
+        const d = item as CreditCardData
+        text += `Titulaire     : ${d.cardholder}\nCarte de crédit : ${d.cardNumber}\nExpiration    : ${d.expiry}\nMontant       : ${d.amount} EUR`
+      } else if (sit === 'eu-debit-card') {
+        const d = item as DebitCardData
+        text += `Titulaire     : ${d.holder}\nCarte de débit : ${d.cardNumber}\nPlafond       : ${d.limit} EUR`
+      } else if (sit === 'swift-code') {
+        const d = item as SwiftData
+        text += `Banque        : ${d.bank.name}\nPays          : ${d.country}\nCode SWIFT/BIC: ${d.swift}`
+      } else if (sit === 'aba-routing') {
+        const d = item as AbaData
+        text += `Banque        : ${d.bank.name}\nABA Routing Number: ${d.aba}\nVille         : ${d.city}`
+      }
+
       text += `\n─────────────────────────────`
-      
+
       dataSlide.addText(text, { x: 0.5, y: 1.5, w: '80%', h: 3, fontSize: 14, color: '333333', fontFace: 'Courier New', fill: { color: 'F5F5F5' }, fit: 'shrink' })
     } else {
       // Variant B - 10 occurrences in 2 columns
@@ -133,7 +144,7 @@ export async function generatePPTDoc(
   const summarySlide = pptx.addSlide()
   addSlideMaster(summarySlide)
   summarySlide.addText('Récapitulatif', { x: 0.5, y: 0.5, w: '90%', fontSize: 28, bold: true, color: PRIMARY_COLOR })
-  
+
   const siteNames = selectedSITs.map(s => SIT_META[s]?.name).join(', ')
   const expectedLabels = selectedSITs.map(s => SIT_META[s]?.label)
   const isSecret = expectedLabels.includes('Secret')
