@@ -111,6 +111,7 @@ type TranslationsShape = {
   tdDocFooter: string
   tdDocConfidentialityTitle: string
   tdDocConfidentialityText: string
+  bottomBannerText: string
 }
 
 const translations: Record<'fr' | 'en', TranslationsShape> = {
@@ -235,6 +236,7 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     tdDocFooter: 'Document généré à des fins de test uniquement | Données synthétiques | OneTrust CM16 | AXA Usage Interne',
     tdDocConfidentialityTitle: 'Notice de confidentialité',
     tdDocConfidentialityText: 'Les données présentées dans ce document sont entièrement fictives et synthétiques. Elles ont été générées algorithmiquement dans le cadre du projet OneTrust CM16 d\'AXA pour valider le bon fonctionnement de Microsoft Purview Auto-Labeling. Toute ressemblance avec des données réelles serait purement fortuite. Ce document ne doit pas quitter le périmètre de test autorisé.',
+    bottomBannerText: 'Plateforme de Test : Données synthétiques uniquement — Zéro risque de fuite de données',
   },
   en: {
     generateBtn: 'Generate Content',
@@ -317,7 +319,7 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     // Test Documents Module
     tdTitle: 'Test Document Generator',
     tdSubtitle: 'Generate professional documents containing synthetic data to validate Microsoft Purview detection.',
-    tdDisclaimer: '⚠ This module generates documents containing exclusively fictional and synthetic data. No real information is used. These files are intended solely for testing purposes within the AXA OneTrust CM16 project. Do not use outside the authorized test perimeter.',
+    tdDisclaimer: ' This module generates documents containing exclusively fictional and synthetic data. No real information is used. These files are intended solely for testing purposes within the AXA OneTrust CM16 project. Do not use outside the authorized test perimeter.',
     tdStep1Title: 'Step 1 — Select the data types to include',
     tdStep1Subtitle: 'Choose between 1 and 5 sensitive information types.',
     tdCardIBANDesc: 'International Banking Account',
@@ -348,6 +350,7 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     tdDocFooter: 'Generated for testing purposes only | Synthetic data | OneTrust CM16 | AXA Internal Use',
     tdDocConfidentialityTitle: 'Confidentiality Notice',
     tdDocConfidentialityText: 'The data presented in this document is entirely fictional and synthetic. It was algorithmically generated as part of AXA\'s OneTrust CM16 project to validate Microsoft Purview Auto-Labeling. Any resemblance to real data is purely coincidental. This document must not leave the authorized test perimeter.',
+    bottomBannerText: ' Test Platform: Synthetic data only — No data leakage risk',
   }
 }
 

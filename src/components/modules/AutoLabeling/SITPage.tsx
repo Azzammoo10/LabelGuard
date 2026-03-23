@@ -265,34 +265,8 @@ export default function SITPage({ sitId }: SITPageProps) {
             </p>
           </div>
 
-          {/* Content block */}
-          <div className="relative group">
-            <pre
-              className="p-5 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed"
-              style={{
-                backgroundColor: 'var(--bg-elevated)',
-                border: '1px solid var(--border-default)',
-                color: 'var(--text-primary)',
-              }}
-            >
-              {content}
-            </pre>
-            <button
-              onClick={handleCopy}
-              className="absolute top-2 right-2 px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-1.5 transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none"
-              style={{
-                backgroundColor: 'var(--bg-surface)',
-                border: '1px solid var(--border-default)',
-                color: copied ? 'var(--status-success)' : 'var(--text-secondary)',
-              }}
-            >
-              {copied ? <CheckCircle2 size={12} /> : <Copy size={12} />}
-              {copied ? t.copied : t.copyBtn}
-            </button>
-          </div>
-
-          {/* ── Secondary: Generate new document ──────────────────────────────── */}
-          <div className="flex justify-start">
+          {/* Regenerate Button */}
+          <div className="flex justify-end">
             <button
               onClick={handleGenerate}
               disabled={isGenerating}
@@ -307,6 +281,33 @@ export default function SITPage({ sitId }: SITPageProps) {
               {t.generateNewDoc}
             </button>
           </div>
+
+          {/* Content block */}
+          <div className="relative group">
+            <pre
+              className="p-5 rounded-xl font-mono text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                border: '1px solid var(--border-default)',
+                color: 'var(--text-primary)',
+              }}
+            >
+              {content}
+            </pre>
+            <button
+              onClick={handleCopy}
+              className="absolute top-2 right-2 px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-1.5 transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100 focus:outline-none"
+              style={{
+                backgroundColor: 'var(--bg-surface)',
+                border: '1px solid var(--border-default)',
+                color: copied ? 'var(--status-success)' : 'var(--text-secondary)',
+              }}
+            >
+              {copied ? <CheckCircle2 size={12} /> : <Copy size={12} />}
+              {copied ? t.copied : t.copyBtn}
+            </button>
+          </div>
+
 
 
           {/* ── Result Tracker ────────────────────────────────────────────── */}

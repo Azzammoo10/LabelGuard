@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import TopBar from './TopBar'
 import Sidebar from './Sidebar'
+import BottomBanner from './BottomBanner'
 import type { ModuleId } from '../../types/index'
 
 // ─── Props ────────────────────────────────────────────────────────────────────
@@ -51,17 +52,20 @@ const Layout: React.FC<LayoutProps> = ({
         />
 
         {/* Main content area */}
-        <main
-          className="flex-1 overflow-y-auto"
-          style={{ backgroundColor: 'var(--bg-base)' }}
-          id="main-content"
-          tabIndex={-1}
-          aria-label="Main content"
-        >
-          <div className="max-w-[900px] mx-auto px-4 md:px-6 py-6">
-            {children}
-          </div>
-        </main>
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <main
+            className="flex-1 overflow-y-auto"
+            style={{ backgroundColor: 'var(--bg-base)' }}
+            id="main-content"
+            tabIndex={-1}
+            aria-label="Main content"
+          >
+            <div className="max-w-[900px] mx-auto px-4 md:px-6 py-6">
+              {children}
+            </div>
+          </main>
+          <BottomBanner />
+        </div>
       </div>
     </div>
   )

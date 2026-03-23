@@ -13,7 +13,7 @@ interface TopBarProps {
 const TRUST_BADGES = [
   {
     key: 'internal',
-    label: 'INTERNAL USE ONLY',
+    label: 'OneTrust CM16',
     bg: 'var(--badge-internal)',
     color: 'var(--accent-primary)',
   },
