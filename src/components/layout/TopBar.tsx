@@ -82,7 +82,7 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, menuOpen }) => {
           <Menu size={20} strokeWidth={1.75} />
         </button>
         <img
-          src="/axa.png"
+          src="/favicon.svg"
           alt="AXA"
           width="36"
           height="36"

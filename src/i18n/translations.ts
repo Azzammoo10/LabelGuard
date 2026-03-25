@@ -7,8 +7,10 @@ type TranslationsShape = {
   copyBtn: string
   copied: string
   variantA: string
+  variantAPlus: string
   variantB: string
   variantAOcc: string
+  variantAPlusOcc: string
   variantBOcc: string
   variantALabel: string
   variantBLabel: string
@@ -16,6 +18,7 @@ type TranslationsShape = {
   confidentiel: string
   secret: string
   variantADesc: string
+  variantAPlusDesc: string
   variantBDesc: string
   instruction: string
   testResult: string
@@ -133,8 +136,10 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     copied: 'Copié !',
     // Variants
     variantA: 'Variante A',
+    variantAPlus: 'Variante A+',
     variantB: 'Variante B',
     variantAOcc: '1 occurrence',
+    variantAPlusOcc: '5 occurrences',
     variantBOcc: '10 occurrences',
     variantALabel: '→ Confidentiel',
     variantBLabel: '→ Secret',
@@ -142,8 +147,9 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     expectedLabel: 'Label attendu',
     confidentiel: 'Confidentiel',
     secret: 'Secret',
-    variantADesc: '1 occurrence détectée',
-    variantBDesc: '10 occurrences détectées',
+    variantADesc: '1 occurrence — cas limite',
+    variantAPlusDesc: '5 occurrences — déclenchement fiable',
+    variantBDesc: '10 occurrences — Secret',
     // Instruction
     instruction: 'Copiez ce contenu dans Word, Outlook ou Excel, puis vérifiez le label appliqué par Purview.',
     // Result tracker
@@ -263,16 +269,19 @@ const translations: Record<'fr' | 'en', TranslationsShape> = {
     copyBtn: 'Copy',
     copied: 'Copied!',
     variantA: 'Variant A',
+    variantAPlus: 'Variant A+',
     variantB: 'Variant B',
     variantAOcc: '1 occurrence',
+    variantAPlusOcc: '5 occurrences',
     variantBOcc: '10 occurrences',
     variantALabel: '→ Confidentiel',
     variantBLabel: '→ Secret',
     expectedLabel: 'Expected Label',
     confidentiel: 'Confidentiel',
     secret: 'Secret',
-    variantADesc: '1 occurrence detected',
-    variantBDesc: '10 occurrences detected',
+    variantADesc: '1 occurrence — edge case',
+    variantAPlusDesc: '5 occurrences — reliable trigger',
+    variantBDesc: '10 occurrences — Secret',
     instruction: 'Copy this content and paste it into a Word, Outlook or Excel document. Then verify the label applied by Purview.',
     testResult: 'Test result:',
     pending: 'Pending',

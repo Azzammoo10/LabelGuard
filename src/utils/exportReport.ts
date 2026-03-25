@@ -1,12 +1,14 @@
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import dataPool from '../data/sit-data-pool.json'
+import type { SITVariantType } from '../types'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface TestResult {
   testId: string
   sitName: string
-  variant: 'A' | 'B'
+  variant: SITVariantType
+  variantKey: string
   occurrences: number
   expectedLabel: 'Confidentiel' | 'Secret'
   status: 'Passed' | 'Failed' | 'Pending'
@@ -15,16 +17,16 @@ interface TestResult {
 
 // ─── All test cases (global) ─────────────────────────────────────────────────
 const TEST_CASES: Omit<TestResult, 'status' | 'date'>[] = [
-  { testId: 'F-IBAN-A', sitName: 'IBAN', variant: 'A', occurrences: 1, expectedLabel: 'Confidentiel' },
-  { testId: 'F-IBAN-B', sitName: 'IBAN', variant: 'B', occurrences: 10, expectedLabel: 'Secret' },
-  { testId: 'F-CC-A', sitName: 'Credit Card', variant: 'A', occurrences: 1, expectedLabel: 'Confidentiel' },
-  { testId: 'F-CC-B', sitName: 'Credit Card', variant: 'B', occurrences: 10, expectedLabel: 'Secret' },
-  { testId: 'F-DC-A', sitName: 'EU Debit Card', variant: 'A', occurrences: 1, expectedLabel: 'Confidentiel' },
-  { testId: 'F-DC-B', sitName: 'EU Debit Card', variant: 'B', occurrences: 10, expectedLabel: 'Secret' },
-  { testId: 'F-SW-A', sitName: 'SWIFT Code', variant: 'A', occurrences: 1, expectedLabel: 'Confidentiel' },
-  { testId: 'F-SW-B', sitName: 'SWIFT Code', variant: 'B', occurrences: 10, expectedLabel: 'Secret' },
-  { testId: 'F-ABA-A', sitName: 'ABA Routing', variant: 'A', occurrences: 1, expectedLabel: 'Confidentiel' },
-  { testId: 'F-ABA-B', sitName: 'ABA Routing', variant: 'B', occurrences: 10, expectedLabel: 'Secret' },
+  { testId: 'F-IBAN-Aplus', sitName: 'IBAN', variant: 'A+', variantKey: 'Aplus', occurrences: 5,  expectedLabel: 'Confidentiel' },
+  { testId: 'F-IBAN-B',    sitName: 'IBAN', variant: 'B',  variantKey: 'B',     occurrences: 10, expectedLabel: 'Secret' },
+  { testId: 'F-CC-Aplus',  sitName: 'Credit Card', variant: 'A+', variantKey: 'Aplus', occurrences: 5,  expectedLabel: 'Confidentiel' },
+  { testId: 'F-CC-B',      sitName: 'Credit Card', variant: 'B',  variantKey: 'B',     occurrences: 10, expectedLabel: 'Secret' },
+  { testId: 'F-DC-Aplus',  sitName: 'EU Debit Card', variant: 'A+', variantKey: 'Aplus', occurrences: 5,  expectedLabel: 'Confidentiel' },
+  { testId: 'F-DC-B',      sitName: 'EU Debit Card', variant: 'B',  variantKey: 'B',     occurrences: 10, expectedLabel: 'Secret' },
+  { testId: 'F-SW-Aplus',  sitName: 'SWIFT Code', variant: 'A+', variantKey: 'Aplus', occurrences: 5,  expectedLabel: 'Confidentiel' },
+  { testId: 'F-SW-B',      sitName: 'SWIFT Code', variant: 'B',  variantKey: 'B',     occurrences: 10, expectedLabel: 'Secret' },
+  { testId: 'F-ABA-Aplus',  sitName: 'ABA Routing', variant: 'A+', variantKey: 'Aplus', occurrences: 5,  expectedLabel: 'Confidentiel' },
+  { testId: 'F-ABA-B',     sitName: 'ABA Routing', variant: 'B',  variantKey: 'B',     occurrences: 10, expectedLabel: 'Secret' },
 ]
 
 // ─── SIT ID → purview_detection_rules key mapping ───────────────────────────
@@ -122,11 +124,14 @@ function buildSharedBase(language: 'fr' | 'en', logo: string, titleOverride?: st
     occurrenceRule: language === 'fr' ? 'Règle d\'occurrence' : 'Occurrence Rule',
     source: language === 'fr' ? 'Source' : 'Source',
     variantARuleText: language === 'fr'
-      ? 'Variante A : 1 occurrence → Confidentiel'
-      : 'Variant A: 1 occurrence → Confidentiel',
+      ? 'Variante A  : 1 occurrence  → Confidentiel'
+      : 'Variant A   : 1 occurrence  → Confidentiel',
+    variantAPlusRuleText: language === 'fr'
+      ? 'Variante A+ : 5 occurrences → Confidentiel'
+      : 'Variant A+  : 5 occurrences → Confidentiel',
     variantBRuleText: language === 'fr'
-      ? 'Variante B : 10 occurrences → Secret'
-      : 'Variant B: 10 occurrences → Secret',
+      ? 'Variante B  : 10 occurrences → Secret'
+      : 'Variant B   : 10 occurrences → Secret',
     sourceValue: 'AXA Auto-Labelling Request-Form Template V1.1',
   }
 
@@ -308,6 +313,7 @@ export async function exportSITReport(
     [L.detectionScope, purviewDescription || (rules?.detection_scope ?? '—')],
     [L.confidence, confidenceLevel || (rules?.confidence ?? '—')],
     [L.occurrenceRule, L.variantARuleText],
+    ['', L.variantAPlusRuleText],
     ['', L.variantBRuleText],
     [L.source, L.sourceValue],
   ]

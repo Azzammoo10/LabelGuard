@@ -21,11 +21,11 @@ const PURVIEW_META: Record<string, { detection: { fr: string; en: string }; conf
 }
 
 const TEST_ID_MAP: Record<string, Record<string, string>> = {
-  'iban':          { A: 'F-IBAN-A', B: 'F-IBAN-B'  },
-  'credit-card':   { A: 'F-CC-A',   B: 'F-CC-B'    },
-  'eu-debit-card': { A: 'F-DC-A',   B: 'F-DC-B'    },
-  'swift-code':    { A: 'F-SW-A',   B: 'F-SW-B'    },
-  'aba-routing':   { A: 'F-ABA-A',  B: 'F-ABA-B'   },
+  'iban':          { 'A+': 'F-IBAN-Aplus', B: 'F-IBAN-B' },
+  'credit-card':   { 'A+': 'F-CC-Aplus',   B: 'F-CC-B'   },
+  'eu-debit-card': { 'A+': 'F-DC-Aplus',   B: 'F-DC-B'   },
+  'swift-code':    { 'A+': 'F-SW-Aplus',   B: 'F-SW-B'   },
+  'aba-routing':   { 'A+': 'F-ABA-Aplus',  B: 'F-ABA-B'  },
 }
 
 export default function SITPage({ sitId }: SITPageProps) {
@@ -34,14 +34,14 @@ export default function SITPage({ sitId }: SITPageProps) {
   const sit = FINANCIAL_SITS[0].sits.find(s => s.id === sitId)
   const meta = PURVIEW_META[sitId]
 
-  const [variantType, setVariantType] = useState<SITVariantType>('A')
+  const [variantType, setVariantType] = useState<SITVariantType>('A+')
   const [content, setContent] = useState<string | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
   const [copied, setCopied] = useState(false)
   const [isDownloading, setIsDownloading] = useState(false)
   const [saved, setSaved] = useState(false)
 
-  const testId = TEST_ID_MAP[sitId]?.[variantType] ?? `sit-${sitId}-${variantType}`
+  const testId = TEST_ID_MAP[sitId]?.[variantType] ?? `${sitId}-${variantType}`
   const storageKey = `sit-result-${testId}`
 
   // React-idiomatic "store previous value" pattern — reset when key changes during render
@@ -62,7 +62,6 @@ export default function SITPage({ sitId }: SITPageProps) {
     setContent(null)
   }
 
-  const isA = variantType === 'A'
   const detectionText = language === 'fr' ? meta?.detection.fr : meta?.detection.en
   const confidenceText = language === 'fr'
     ? (meta?.confidence ?? 'Élevé')
@@ -116,7 +115,7 @@ export default function SITPage({ sitId }: SITPageProps) {
 
   if (!sit) return <div className="p-6">SIT not found</div>
 
-  const isConfidentiel = isA
+  const isConfidentiel = variantType === 'A+'
 
   // ── Segmented status config (no emojis) ───────────────────────────────────────
   type StatusDef = {
@@ -151,7 +150,7 @@ export default function SITPage({ sitId }: SITPageProps) {
   }
 
   const variantTabs: { id: SITVariantType; label: string; occ: string; expectedLabel: string }[] = [
-    { id: 'A', label: t.variantA, occ: t.variantAOcc, expectedLabel: t.variantALabel },
+    { id: 'A+', label: t.variantAPlus, occ: t.variantAPlusOcc, expectedLabel: t.variantALabel },
     { id: 'B', label: t.variantB, occ: t.variantBOcc, expectedLabel: t.variantBLabel },
   ]
 
@@ -215,7 +214,7 @@ export default function SITPage({ sitId }: SITPageProps) {
               </span>
               <span
                 className="font-mono text-xs font-semibold"
-                style={{ color: id === 'A' ? '#B45309' : '#991B1B' }}
+                style={{ color: id === 'A+' ? '#B45309' : '#991B1B' }}
               >
                 {expectedLabel}
               </span>
@@ -250,7 +249,7 @@ export default function SITPage({ sitId }: SITPageProps) {
                 backgroundColor: 'transparent',
               }}
             >
-              {t.expectedLabel} : {isConfidentiel ? t.confidentiel : t.secret} — {isConfidentiel ? t.variantADesc : t.variantBDesc}
+              {t.expectedLabel} : {isConfidentiel ? t.confidentiel : t.secret} — {variantType === 'A+' ? t.variantAPlusDesc : t.variantBDesc}
             </span>
           </div>
 

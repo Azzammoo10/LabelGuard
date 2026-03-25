@@ -89,11 +89,11 @@ export async function generatePPTDoc(
     dataSlide.addText('Données synthétiques — Test CM16 — Ne pas utiliser hors périmètre autorisé', { x: 0.5, y: 5.0, w: '90%', fontSize: 11, italic: true, color: '888888' })
 
     const formatSITText = (item: unknown): string => {
-      if (sit === 'iban') { const d = item as IbanData; return `IBAN: ${d.iban}\nBénéf: ${d.beneficiary}` }
-      if (sit === 'credit-card') { const d = item as CreditCardData; return `Carte de crédit: ${d.cardNumber}\nExpire: ${d.expiry}` }
-      if (sit === 'eu-debit-card') { const d = item as DebitCardData; return `Carte de débit: ${d.cardNumber}\nEmployé: ${d.holder}` }
-      if (sit === 'swift-code') { const d = item as SwiftData; return `Code SWIFT/BIC: ${d.swift}\nBanque: ${d.bank.name}` }
-      if (sit === 'aba-routing') { const d = item as AbaData; return `ABA Routing Number: ${d.aba}\nBanque: ${d.bank.name}` }
+      if (sit === 'iban') { const d = item as IbanData; return `IBAN : ${d.iban}\nBénéf: ${d.beneficiary}` }
+      if (sit === 'credit-card') { const d = item as CreditCardData; return isFr ? `Carte de crédit : ${d.cardNumber}\nExpire: ${d.expiry}` : `Credit card: ${d.cardNumber}\nExpiry: ${d.expiry}` }
+      if (sit === 'eu-debit-card') { const d = item as DebitCardData; return isFr ? `Carte de débit : ${d.cardNumber}\nEmployé: ${d.holder}` : `Debit card: ${d.cardNumber}\nEmployee: ${d.holder}` }
+      if (sit === 'swift-code') { const d = item as SwiftData; return isFr ? `SWIFT/BIC : ${d.swift}\nBanque: ${d.bank.name}` : `BIC: ${d.swift}\nBank: ${d.bank.name}` }
+      if (sit === 'aba-routing') { const d = item as AbaData; return `ABA Routing Number : ${d.aba}\nBank: ${d.bank.name}` }
       return ''
     }
 
@@ -102,19 +102,19 @@ export async function generatePPTDoc(
       let text = `Occurrence 1 de 1 :\n─────────────────────────────\n`
       if (sit === 'iban') {
         const d = item as IbanData
-        text += `Bénéficiaire : ${d.beneficiary}\nIBAN          : ${d.iban}\nSWIFT         : ${d.swift}\nMontant       : ${d.amount} EUR\nRéférence     : ${d.reference}`
+        text += `Bénéficiaire : ${d.beneficiary}\nIBAN : ${d.iban}\nSWIFT/BIC : ${d.swift}\nMontant       : ${d.amount} EUR\nRéférence     : ${d.reference}`
       } else if (sit === 'credit-card') {
         const d = item as CreditCardData
-        text += `Titulaire     : ${d.cardholder}\nCarte de crédit : ${d.cardNumber}\nExpiration    : ${d.expiry}\nMontant       : ${d.amount} EUR`
+        text += `Titulaire     : ${d.cardholder}\n${isFr ? `Carte de crédit : ${d.cardNumber}` : `Credit card: ${d.cardNumber}`}\nExpiration    : ${d.expiry}\nMontant       : ${d.amount} EUR`
       } else if (sit === 'eu-debit-card') {
         const d = item as DebitCardData
-        text += `Titulaire     : ${d.holder}\nCarte de débit : ${d.cardNumber}\nPlafond       : ${d.limit} EUR`
+        text += `Titulaire     : ${d.holder}\n${isFr ? `Carte de débit : ${d.cardNumber}` : `Debit card: ${d.cardNumber}`}\nPlafond       : ${d.limit} EUR`
       } else if (sit === 'swift-code') {
         const d = item as SwiftData
-        text += `Banque        : ${d.bank.name}\nPays          : ${d.country}\nCode SWIFT/BIC: ${d.swift}`
+        text += `Banque        : ${d.bank.name}\nPays          : ${d.country}\n${isFr ? `SWIFT/BIC : ${d.swift}` : `BIC: ${d.swift}`}`
       } else if (sit === 'aba-routing') {
         const d = item as AbaData
-        text += `Banque        : ${d.bank.name}\nABA Routing Number: ${d.aba}\nVille         : ${d.city}`
+        text += `Banque        : ${d.bank.name}\nABA Routing Number : ${d.aba}\nVille         : ${d.city}`
       }
 
       text += `\n─────────────────────────────`

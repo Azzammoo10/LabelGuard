@@ -108,8 +108,8 @@ export async function generateWordDoc(
         addSpacing(),
         new Paragraph({ text: `  Bénéficiaire : ${item.beneficiary}` }),
         new Paragraph({ text: `  Banque        : ${item.bank.name}` }),
-        new Paragraph({ text: `  IBAN          : ${item.iban}` }),
-        new Paragraph({ text: `  SWIFT/BIC     : ${item.swift}` }),
+        new Paragraph({ text: `  IBAN : ${item.iban}` }),
+        new Paragraph({ text: `  SWIFT/BIC : ${item.swift}` }),
         new Paragraph({ text: `  Montant       : ${item.amount} EUR` }),
         new Paragraph({ text: `  Motif         : ${item.reference} — ${scenario}` }),
         new Paragraph({ text: `  Date d'effet  : ${dateStr}` }),
@@ -123,8 +123,8 @@ export async function generateWordDoc(
       data.forEach((item, idx) => {
         sections.push(
           new Paragraph({ children: [new TextRun({ text: `Virement ${idx + 1} — ${item.beneficiary}`, bold: true })] }),
-          new Paragraph({ text: `  IBAN          : ${item.iban}` }),
-          new Paragraph({ text: `  SWIFT/BIC     : ${item.swift}` }),
+          new Paragraph({ text: `  IBAN : ${item.iban}` }),
+          new Paragraph({ text: `  SWIFT/BIC : ${item.swift}` }),
           new Paragraph({ text: `  Montant       : ${item.amount} EUR` }),
           new Paragraph({ text: `  Motif         : ${item.reference}` }),
           addSpacing()
@@ -168,7 +168,7 @@ export async function generateWordDoc(
         new Paragraph({ text: `Date       : ${item.date}` }),
         new Paragraph({ text: `Nature     : Déplacement professionnel` }),
         new Paragraph({ text: `Mode paiement : Carte de crédit` }),
-        new Paragraph({ text: `Numéro de carte : ${item.cardNumber}` }),
+        new Paragraph({ text: isFr ? `Carte de crédit : ${item.cardNumber}` : `Credit card: ${item.cardNumber}` }),
         new Paragraph({ text: `Titulaire  : ${item.cardholder}` }),
         new Paragraph({ text: `Expiration : ${item.expiry}` }),
         new Paragraph({ text: `Montant    : ${item.amount} EUR` }),
@@ -181,7 +181,7 @@ export async function generateWordDoc(
           new Paragraph({ children: [new TextRun({ text: `Dépense ${idx + 1} :`, bold: true })] }),
           new Paragraph({ text: `  Date     : ${item.date}` }),
           new Paragraph({ text: `  Nature   : Repas client / Déplacement` }),
-          new Paragraph({ text: `  Carte de crédit : ${item.cardNumber}` }),
+          new Paragraph({ text: isFr ? `  Carte de crédit : ${item.cardNumber}` : `  Credit card: ${item.cardNumber}` }),
           new Paragraph({ text: `  Montant  : ${item.amount} EUR` }),
           addSpacing()
         )
@@ -215,7 +215,7 @@ export async function generateWordDoc(
         new Paragraph({ text: `  Titulaire     : ${item.holder}` }),
         new Paragraph({ text: `  Département   : ${item.department}` }),
         new Paragraph({ text: `  Matricule     : MATR-${Math.floor(Math.random() * 9000)}` }),
-        new Paragraph({ text: `  N° de carte   : ${item.cardNumber}` }),
+        new Paragraph({ text: isFr ? `  Carte de débit : ${item.cardNumber}` : `  Debit card: ${item.cardNumber}` }),
         new Paragraph({ text: `  Validité      : ${item.expiry}` }),
         new Paragraph({ text: `  Plafond mensuel : ${item.limit} EUR` }),
         new Paragraph({ text: `  Usage autorisé : Dépenses fournisseurs approuvées uniquement` }),
@@ -230,7 +230,7 @@ export async function generateWordDoc(
         sections.push(
           new Paragraph({ children: [new TextRun({ text: `Attribution ${idx + 1} :`, bold: true })] }),
           new Paragraph({ text: `  Titulaire : ${item.holder}` }),
-          new Paragraph({ text: `  Carte     : ${item.cardNumber}` }),
+          new Paragraph({ text: isFr ? `  Carte de débit : ${item.cardNumber}` : `  Debit card: ${item.cardNumber}` }),
           new Paragraph({ text: `  Validité  : ${item.expiry}` }),
           new Paragraph({ text: `  Plafond   : ${item.limit} EUR` }),
           addSpacing()
@@ -262,10 +262,10 @@ export async function generateWordDoc(
         new Paragraph({ text: isFr ? 'Dans le cadre de nos relations commerciales internationales, nous vous prions de traiter le paiement suivant :' : 'Please process the following international payment:' }),
         addSpacing(),
         new Paragraph({ children: [new TextRun({ text: `  Banque émettrice : AXA Banque France`, bold: true })] }),
-        new Paragraph({ text: `  Code SWIFT/BIC   : AXABFRPP` }),
+        new Paragraph({ text: `  SWIFT/BIC : AXABFRPP` }),
         addSpacing(),
         new Paragraph({ children: [new TextRun({ text: `  Banque bénéficiaire : ${item.bank.name}`, bold: true })] }),
-        new Paragraph({ text: `  Code SWIFT/BIC      : ${item.swift}` }),
+        new Paragraph({ text: `  SWIFT/BIC : ${item.swift}` }),
         new Paragraph({ text: `  Pays                : ${item.country}` }),
         new Paragraph({ text: `  Ville               : ${item.city}` }),
         addSpacing(),
@@ -284,7 +284,7 @@ export async function generateWordDoc(
         sections.push(
           new Paragraph({ children: [new TextRun({ text: `Correspondant ${idx + 1} :`, bold: true })] }),
           new Paragraph({ text: `  Banque   : ${item.bank.name}` }),
-          new Paragraph({ text: `  SWIFT    : ${item.swift}` }),
+          new Paragraph({ text: isFr ? `  SWIFT/BIC : ${item.swift}` : `  BIC: ${item.swift}` }),
           new Paragraph({ text: `  Pays     : ${item.country}` }),
           new Paragraph({ text: `  Contact  : Représentant Local` }),
           addSpacing()
@@ -311,9 +311,9 @@ export async function generateWordDoc(
         new Paragraph({ children: [new TextRun({ text: `  Originating Bank  : AXA Financial US`, bold: true })] }),
         addSpacing(),
         new Paragraph({ children: [new TextRun({ text: `  Receiving Bank    : ${item.bank.name}`, bold: true })] }),
-        new Paragraph({ text: `  ABA Routing No.   : ${item.aba}` }),
+        new Paragraph({ text: `  ABA Routing Number : ${item.aba}` }),
         new Paragraph({ text: `  Account Number    : 000${Math.floor(Math.random() * 9000000)}` }),
-        new Paragraph({ text: `  SWIFT/BIC         : ${item.swift}` }),
+        new Paragraph({ text: `  SWIFT/BIC : ${item.swift}` }),
         new Paragraph({ text: `  City              : ${item.city}` }),
         addSpacing(),
         new Paragraph({ text: `  Beneficiary       : US Vendor LLC` }),
@@ -331,7 +331,7 @@ export async function generateWordDoc(
         sections.push(
           new Paragraph({ children: [new TextRun({ text: `Transfer ${idx + 1} :`, bold: true })] }),
           new Paragraph({ text: `  Receiving Bank    : ${item.bank.name}` }),
-          new Paragraph({ text: `  ABA Routing No.   : ${item.aba}` }),
+          new Paragraph({ text: `  ABA Routing Number : ${item.aba}` }),
           new Paragraph({ text: `  Amount            : $ ${(Math.random() * 10000).toFixed(2)}` }),
           new Paragraph({ text: `  Purpose           : ${scenario}` }),
           addSpacing()

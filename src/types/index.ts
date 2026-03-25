@@ -1,6 +1,6 @@
 export type ModuleId = 'about' | 'iban' | 'credit-card' | 'eu-debit-card' | 'swift-code' | 'aba-routing' | 'test-documents'
 
-export type SITVariantType = 'A' | 'B'
+export type SITVariantType = 'A+' | 'B'
 
 export interface SITRecord {
   id: string

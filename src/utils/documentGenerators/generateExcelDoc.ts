@@ -40,7 +40,7 @@ export async function generateExcelDoc(
       { header: '#', key: 'index', width: 5 },
       { header: isFr ? 'Bénéficiaire' : 'Beneficiary', key: 'beneficiary', width: 30 },
       { header: isFr ? 'Banque' : 'Bank', key: 'bank_name', width: 25 },
-      { header: 'Numéro IBAN', key: 'iban', width: 35 }, // Keyword label
+      { header: 'IBAN :', key: 'iban', width: 35 }, // Keyword label
       { header: 'SWIFT/BIC', key: 'swift', width: 15 },
       { header: isFr ? 'Montant' : 'Amount', key: 'amount', width: 15 }
     ]
@@ -56,7 +56,7 @@ export async function generateExcelDoc(
     sheet.columns = [
       { header: '#', key: 'index', width: 5 },
       { header: isFr ? 'Titulaire' : 'Cardholder', key: 'cardholder', width: 25 },
-      { header: isFr ? 'Numéro de carte' : 'Credit card', key: 'cardNumber', width: 25 }, // Keyword label
+      { header: isFr ? 'Carte de crédit :' : 'Credit card:', key: 'cardNumber', width: 25 }, // Keyword label
       { header: isFr ? 'Expiration' : 'Expiry', key: 'expiry', width: 12 },
       { header: isFr ? 'Montant' : 'Amount', key: 'amount', width: 15 }
     ]
@@ -72,7 +72,7 @@ export async function generateExcelDoc(
     sheet.columns = [
       { header: '#', key: 'index', width: 5 },
       { header: isFr ? 'Employé' : 'Employee', key: 'holder', width: 25 },
-      { header: isFr ? 'Carte de débit' : 'Debit card number', key: 'cardNumber', width: 25 }, // Keyword label
+      { header: isFr ? 'Carte de débit :' : 'Debit card:', key: 'cardNumber', width: 25 }, // Keyword label
       { header: isFr ? 'Plafond' : 'Limit', key: 'limit', width: 15 }
     ]
     styleHeaderRow(sheet.getRow(1))
@@ -88,7 +88,7 @@ export async function generateExcelDoc(
       { header: '#', key: 'index', width: 5 },
       { header: isFr ? 'Banque' : 'Bank', key: 'bank_name', width: 25 },
       { header: isFr ? 'Pays' : 'Country', key: 'country', width: 20 },
-      { header: 'Code SWIFT/BIC', key: 'swift', width: 15 } // Keyword label
+      { header: isFr ? 'SWIFT/BIC :' : 'BIC:', key: 'swift', width: 15 } // Keyword label
     ]
     styleHeaderRow(sheet.getRow(1))
     
@@ -103,7 +103,7 @@ export async function generateExcelDoc(
       { header: '#', key: 'index', width: 5 },
       { header: isFr ? 'Banque' : 'Bank', key: 'bank_name', width: 25 },
       { header: isFr ? 'Ville' : 'City', key: 'city', width: 20 },
-      { header: 'ABA Routing Number', key: 'aba', width: 20 } // Keyword label
+      { header: 'ABA Routing Number :', key: 'aba', width: 20 } // Keyword label
     ]
     styleHeaderRow(sheet.getRow(1))
     
